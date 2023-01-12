@@ -1,0 +1,11 @@
+html,
+body {
+  background-color: #89cffd;
+}
+
+h1 {
+  font-size: 5em;
+  font-weight: bold;
+  text-align: center;
+  color: #f94892;
+}
