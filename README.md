@@ -26,7 +26,20 @@ docker-compose up -d
 5. Reconstruir la base de datos con la semilla.
 
 ```bash
-npm run seed
+http://localhost:3000/api/seed
+```
+
+
+6. Levantar el servidor.
+
+```bash
+npm run start:dev
+```
+
+7. Probar el API.
+
+```bash
+http://localhost:3000/api
 ```
 
 ## Stack usado
