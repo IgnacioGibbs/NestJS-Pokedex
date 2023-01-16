@@ -34,6 +34,10 @@ export class PokemonService {
 
   async findAll() {
     const pokemons = await this.pokemonModel.find();
+
+    if (!pokemons.length)
+      throw new NotFoundException(`There are no pokemons in the database`);
+
     return {
       message: 'All pokemons',
       pokemons,
