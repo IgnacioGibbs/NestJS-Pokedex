@@ -9,6 +9,7 @@ import { isValidObjectId, Model } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class PokemonService {
@@ -32,14 +33,22 @@ export class PokemonService {
     }
   }
 
-  async findAll() {
-    const pokemons = await this.pokemonModel.find();
+  async findAll(paginationDto: PaginationDto) {
+    const { limit = 10, skip = 0 } = paginationDto;
+    const pokemons = await this.pokemonModel
+      .find()
+      .limit(limit)
+      .skip(skip)
+      .sort({ no: 1 }) // Ordena los resultados por el campo no de forma ascendente;
+      .select('-__v'); // Excluye el campo __v de los resultados;
 
     if (!pokemons.length)
       throw new NotFoundException(`There are no pokemons in the database`);
 
     return {
-      message: 'All pokemons',
+      message: `${limit} pokemons have been found from the ${skip}`,
+      limit: limit,
+      skip: skip,
       pokemons,
     };
   }
