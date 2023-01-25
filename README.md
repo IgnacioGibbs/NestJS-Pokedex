@@ -51,4 +51,14 @@ http://localhost:3000/api
 * MongoDB
 * Mongoose
 * NestJS
-* Docker Compose
+* Docker
+
+# Build de producción
+
+1. Crear el archivo __.env.prod__.
+2. Completar las variables de entorno definidas en el __.env.prod__.
+3. Crear la nueva imagen.
+
+```bash
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
